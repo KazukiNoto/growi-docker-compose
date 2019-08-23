@@ -1,4 +1,4 @@
-version: '3'
+version: "3"
 
 services:
   app:
@@ -6,7 +6,7 @@ services:
       context: .
       dockerfile: ./Dockerfile
     ports:
-      - 127.0.0.1:3000:3000    # localhost only by default
+      - 3000:3000 # localhost only by default
     links:
       - mongo:mongo
       - elasticsearch:elasticsearch
@@ -27,10 +27,10 @@ services:
       # - FORCE_WIKI_MODE='private'   # activate this line to force wiki private mode
 
     command: "dockerize
-              -wait tcp://mongo:27017
-              -wait tcp://elasticsearch:9200
-              -timeout 60s
-              npm run server:prod"
+      -wait tcp://mongo:27017
+      -wait tcp://elasticsearch:9200
+      -timeout 60s
+      npm run server:prod"
     restart: unless-stopped
     volumes:
       - growi_data:/data
@@ -48,7 +48,7 @@ services:
       dockerfile: ./Dockerfile
     environment:
       - bootstrap.memory_lock=true
-      - "ES_JAVA_OPTS=-Xms256m -Xmx256m"  # increase amount if you have enough memory
+      - "ES_JAVA_OPTS=-Xms256m -Xmx256m" # increase amount if you have enough memory
     ulimits:
       memlock:
         soft: -1
